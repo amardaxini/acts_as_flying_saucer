@@ -1,0 +1,3 @@
+module ActsAsFlyingSaucer
+  # Your code goes here...
+end
