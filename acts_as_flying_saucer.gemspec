@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "acts_as_flying_saucer"
   s.version     = ActsAsFlyingSaucer::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Amar Daxini"]
+  s.email       = ["amardaxini@gmail.com"]
   s.homepage    = "http://rubygems.org/gems/acts_as_flying_saucer"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{XHTML to PDF using Flying Saucer java library}
+  s.description = %q{XHTML to PDF using Flying Saucer java library}
 
   s.rubyforge_project = "acts_as_flying_saucer"
 
