@@ -99,7 +99,7 @@ Sinatra
   	   html_content = erb :index
        render_pdf(:template=>html_content,:pdf_file=>"test.pdf",
                 :send_file=> {:file_name=>"test.pdf",:stream=>false},:password=>"xxx")
-   end
+       end
 Ruby
 ----
 	class Pdf
