@@ -1,3 +1,4 @@
+require 'nailgun'
 module ActsAsFlyingSaucer
 
 	# Xhtml2Pdf
@@ -14,7 +15,7 @@ module ActsAsFlyingSaucer
 			class_path = "'.#{options[:classpath_separator]}#{java_dir}/jar/acts_as_flying_saucer.jar'"
 
 			if options[:nailgun]
-				command = "#{Nailgun::NgCommand::NGPATH} Xhtml2Pdf #{options[:input_file]} #{options[:output_file]}"
+				command = "#{Nailgun::NgCommand::NGPATH} --nailgun-server #{ActsAsFlyingSaucer::Config.options[:nailgun_host]}  --nailgun-port #{ ActsAsFlyingSaucer::Config.options[:nailgun_port]} Xhtml2Pdf #{options[:input_file]} #{options[:output_file]}"
 			else
 				command = "#{options[:java_bin]} -Xmx512m -Djava.awt.headless=true -cp #{class_path} acts_as_flying_saucer.Xhtml2Pdf #{options[:input_file]} #{options[:output_file]}"
 			end
@@ -25,7 +26,7 @@ module ActsAsFlyingSaucer
 			java_dir = File.join(File.expand_path(File.dirname(__FILE__)), "java")
 			class_path = "'.#{options[:classpath_separator]}#{java_dir}/jar/acts_as_flying_saucer.jar'"
 			if options[:nailgun]
-				command = "#{Nailgun::NgCommand::NGPATH} encryptPdf #{options[:input_file]} #{options[:output_file]}"
+				command = "#{Nailgun::NgCommand::NGPATH}  --nailgun-server #{ActsAsFlyingSaucer::Config.options[:nailgun_host]}  --nailgun-port #{ ActsAsFlyingSaucer::Config.options[:nailgun_port]} encryptPdf #{options[:input_file]} #{options[:output_file]}"
 			else
 				command = "#{options[:java_bin]} -Xmx#{options[:max_memory_mb]}m -Djava.awt.headless=true -cp #{class_path} acts_as_flying_saucer.encryptPdf #{options[:output_file]} #{output_file_name} #{password}"
 			end

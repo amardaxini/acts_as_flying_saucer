@@ -119,35 +119,37 @@ These are the default settings which can be overwritten in your enviroment confi
       :classpath_separator => ':',  # classpath separator. unixes system use ':' and windows ';'
       :tmp_path => "/tmp",          # path where temporary files will be stored
       :max_memory_mb=>512,
-      :nailgun =>false
+      :nailgun =>false,
+      :nailgun_port => '2113',
+		  :nailgun_host => 'localhost'
     }
     
     
 Advance Configuration (TODO: Manually)
 -------------------
-Now acts_as_flying_saucer call java each time on creating pdf this will speed down speed of generaion of pdf.To overcome this start nailgun server that reads data from specific port and rendered pdf.so there is no need to launch the jvm everytime a new pdf is generated.
+Now acts_as_flying_saucer call java each time on creating pdf this will speed down speed of generation of pdf.To overcome this start nailgun server that reads data from specific port and rendered pdf.so there is no need to launch the jvm every time a new pdf is generated.
+Generate pdf with nailgun you have to overwrite Configuration make **nailgun option to true**
 
-So to start nailgun with acts_as_flying_saucer plugin:
+
+So to start nailgun with acts_as_flying_saucer gem:
 
 <code>
- ./script/plugin install git://github.com/amardaxini/nailgun.git
+ sudo gem install nailgun
 </code>
 
 Start nailgun server.Before starting nailgun server make sure that your **classpath environment variable** set and point to jre/lib
 
+On startup or manually write following line
+You can write into config/initializers/
+After setting nailgun host and port
 <code>
- script/nailgun start
-</code> 
-<code>
-  rake nailgun
-</code>
-Generate pdf with nailgun you have to overwrite Configuration make **nailgun option to true**
-Now after making nailgun option true run
-
-<code>rake acts_as_flying_saucer</code>
-
-<code>
- script/flying_saucer_nailgun
+ ActsAsFlyingSaucer::Config.setup_nailgun
 </code>
 
-Now you are ready with nailgun. 
+You can Manage nailgun using
+<code>
+  nailgun
+</code>
+It will generate nailgun_config binary and set configuration parameter
+and now you can start and stop nailgun server
+
