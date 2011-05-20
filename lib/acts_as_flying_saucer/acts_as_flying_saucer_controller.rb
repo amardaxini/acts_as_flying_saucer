@@ -38,6 +38,8 @@ module ActsAsFlyingSaucer
 				self.pdf_mode = :create
 				if defined?(Rails)
 					html = render_to_string options
+					host = ActionController::Base.asset_host
+        	ActionController::Base.asset_host = request.protocol + request.host_with_port if host.blank?
 					if options[:debug_html]
 						#    ActionController::Base.asset_host = host
 						response.header["Content-Type"] = "text/html; charset=utf-8"
@@ -79,7 +81,9 @@ module ActsAsFlyingSaucer
 					output_file = op
 				end
 				# restoring the host
-				# ActionController::Base.asset_host = host
+				if defined?(Rails)
+				 ActionController::Base.asset_host = host
+				end
 
 				# sending the file to the client
 				if options[:send_file]
