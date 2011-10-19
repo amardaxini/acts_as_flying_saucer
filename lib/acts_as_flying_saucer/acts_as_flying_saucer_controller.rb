@@ -34,7 +34,7 @@ module ActsAsFlyingSaucer
 #        ActionController::Base.asset_host = request.protocol + request.host_with_port if host.blank?
 #
 #        logger.debug("#{host} - #{host.nil?} - #{ActionController::Base.asset_host}")
-
+        tidy_clean = options[:clean] || false
 				self.pdf_mode = :create
 				if defined?(Rails)
 					html = render_to_string options
@@ -55,6 +55,7 @@ module ActsAsFlyingSaucer
 				end
 				# saving the file
 				tmp_dir = ActsAsFlyingSaucer::Config.options[:tmp_path]
+        html = TidyFFI::Tidy.new(html).clean if tidy_clean
 				html_digest = Digest::MD5.hexdigest(html)
 				input_file =File.join(File.expand_path("#{tmp_dir}"),"#{html_digest}.html")
 

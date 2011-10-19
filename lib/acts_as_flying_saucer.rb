@@ -2,6 +2,7 @@ require 'acts_as_flying_saucer/config'
 require 'acts_as_flying_saucer/xhtml2pdf'
 require 'acts_as_flying_saucer/acts_as_flying_saucer_controller'
 require 'nailgun'
+require 'tidy_ffi'
 if defined?(Rails)
 	ActionController::Base.send(:include, ActsAsFlyingSaucer::Controller)
 elsif defined?(Sinatra)
