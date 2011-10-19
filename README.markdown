@@ -34,7 +34,7 @@ It accepts the same options as ActionController::Base#render plus the following 
 
 :debug_html - (boolean expected) generates html output to the browser for debugging purposes
 
-:clean  It cleans up html using tidy (It uses tidy_ffi gem)
+:clean  - It cleans up html using tidy (It uses tidy_ffi gem)
           
     class FooController < ActionController::Base
       acts_as_flying_saucer
