@@ -87,15 +87,19 @@ module ActsAsFlyingSaucer
 				end
 
 				# sending the file to the client
-				if options[:send_file]
+        if option[:send_attachment] == false
+          output_file
+        else
+				  if options[:send_file]
 
-					send_file_options = {
-									:filename => File.basename(output_file)
-									#:x_sendfile => true,
-					}
-					send_file_options.merge!(options[:send_file]) if options.respond_to?(:merge)
-					send_file(output_file, send_file_options)
-				end
+					  send_file_options = {
+									  :filename => File.basename(output_file)
+									  #:x_sendfile => true,
+					  }
+					  send_file_options.merge!(options[:send_file]) if options.respond_to?(:merge)
+					  send_file(output_file, send_file_options)
+				  end
+        end
 			end
 		end
 	end
