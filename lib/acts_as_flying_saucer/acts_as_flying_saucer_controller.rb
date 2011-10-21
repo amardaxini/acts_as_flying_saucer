@@ -37,9 +37,9 @@ module ActsAsFlyingSaucer
         tidy_clean = options[:clean] || false
 				self.pdf_mode = :create
 				if defined?(Rails)
-					html = render_to_string options
-					host = ActionController::Base.asset_host
+          host = ActionController::Base.asset_host
         	ActionController::Base.asset_host = request.protocol + request.host_with_port if host.blank?
+					html = render_to_string options
 					if options[:debug_html]
 						#    ActionController::Base.asset_host = host
 						response.header["Content-Type"] = "text/html; charset=utf-8"
