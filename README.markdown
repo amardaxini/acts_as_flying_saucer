@@ -36,7 +36,7 @@ It accepts the same options as ActionController::Base#render plus the following 
 
 :clean  - (boolean expected) It cleans up html using tidy (It uses tidy_ffi gem) default is false
 
-:send_attachment - (boolean expected) If it is false it returns output pdf and attachment is not sent to client.
+:send_to_client - (boolean expected) If it is false it returns output pdf and attachment is not sent to client.
           
     class FooController < ActionController::Base
       acts_as_flying_saucer

@@ -87,7 +87,7 @@ module ActsAsFlyingSaucer
 				end
 
 				# sending the file to the client
-        if options[:send_attachment] == false
+        if options[:send_to_client] == false
           output_file
         else
 				  if options[:send_file]
