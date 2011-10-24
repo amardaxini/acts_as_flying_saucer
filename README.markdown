@@ -16,7 +16,14 @@ Grab the last version from Github:
 Requirements
 ------------
 
-JDK 1.5.x or 1.6.x
+* JDK 1.5.x or 1.6.x
+* Tidy required
+** Ubuntu Installation
+ Install tidy with dev and ruby binding.
+ * apt-get install tidy
+ * apt-get install libtidy-dev
+ * apt-get install libtidy-ruby
+
 
 Usage
 -----
