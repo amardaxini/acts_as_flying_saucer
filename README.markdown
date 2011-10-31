@@ -45,6 +45,8 @@ It accepts the same options as ActionController::Base#render plus the following 
 :clean  - (boolean expected) It cleans up html using tidy (It uses tidy_ffi gem) default is false
 
 :send_to_client - (boolean expected) If it is false it returns output pdf and attachment is not sent to client.
+
+:url - url can be file path or any http url (with http or https) or string. This will generated pdf from file,url or string. 
           
     class FooController < ActionController::Base
       acts_as_flying_saucer
@@ -115,12 +117,15 @@ Sinatra
 Ruby
 ----
 	class Pdf
-  		def generate_pdf(input_file_html,output_pdf)
-  	  		options = ActsAsFlyingSaucer::Config.options.merge({:input_file=>input_file_html,:output_file=>output_pdf})
-  		    ActsAsFlyingSaucer::Xhtml2Pdf.write_pdf(options)
+    include ActsAsFlyingSaucer::Controller
+    acts_as_flying_saucer
+  		def generate_pdf(input_file_html_or_string,output_pdf)
+  	  		options = ActsAsFlyingSaucer::Config.options.merge({:url=>input_file_html_or_string,:output_file=>output_pdf})
+  		    render_pdf(options)
   		end
 	end
 
+ 
 Configuration
 -------------
 

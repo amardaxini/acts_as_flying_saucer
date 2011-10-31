@@ -29,14 +29,18 @@ module ActsAsFlyingSaucer
 			# render_pdf
 			#
 			def render_pdf(options = {})
-
-#        host = ActionController::Base.asset_host
-#        ActionController::Base.asset_host = request.protocol + request.host_with_port if host.blank?
-#
-#        logger.debug("#{host} - #{host.nil?} - #{ActionController::Base.asset_host}")
-        tidy_clean = options[:clean] || false
+       tidy_clean = options[:clean] || false
 				self.pdf_mode = :create
-				if defined?(Rails)
+        if options[:url]
+          tidy_clean = true
+          if options[:url].match(/\Ahttp/)
+            response = Net::HTTP.get_response(URI.parse(options[:url]))
+          elsif File.exist?(options[:url])
+            html =  File.read(options[:url]) rescue  ""
+          else
+            html = options[:url]
+          end
+        elsif defined?(Rails)
           host = ActionController::Base.asset_host
         	ActionController::Base.asset_host = request.protocol + request.host_with_port if host.blank?
 					html = render_to_string options
@@ -55,7 +59,7 @@ module ActsAsFlyingSaucer
 				end
 				# saving the file
 				tmp_dir = ActsAsFlyingSaucer::Config.options[:tmp_path]
-        html = TidyFFI::Tidy.new(html).clean if tidy_clean
+        html = TidyFFI::Tidy.new(html,:numeric_entities=>true,:output_xhtml=>true).clean if tidy_clean
 				html_digest = Digest::MD5.hexdigest(html)
 				input_file =File.join(File.expand_path("#{tmp_dir}"),"#{html_digest}.html")
 
