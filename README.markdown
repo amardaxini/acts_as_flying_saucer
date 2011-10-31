@@ -120,7 +120,7 @@ Ruby
     include ActsAsFlyingSaucer::Controller
     acts_as_flying_saucer
   		def generate_pdf(input_file_html_or_string,output_pdf)
-  	  		options = ActsAsFlyingSaucer::Config.options.merge({:url=>input_file_html_or_string,:output_file=>output_pdf})
+  	  		options = ActsAsFlyingSaucer::Config.options.merge({:url=>input_file_html_or_string,:pdf_file=>output_pdf})
   		    render_pdf(options)
   		end
 	end

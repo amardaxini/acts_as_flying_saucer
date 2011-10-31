@@ -34,7 +34,7 @@ module ActsAsFlyingSaucer
         if options[:url]
           tidy_clean = true
           if options[:url].match(/\Ahttp/)
-            response = Net::HTTP.get_response(URI.parse(options[:url]))
+            html = Net::HTTP.get_response(URI.parse(options[:url])).body rescue options[:url]
           elsif File.exist?(options[:url])
             html =  File.read(options[:url]) rescue  ""
           else
