@@ -5,14 +5,18 @@ module ActsAsFlyingSaucer
 	#
 	class Xhtml2Pdf
 		def self.write_pdf(options)
+
 			if 	!File.exists?(options[:input_file])
 				File.open(options[:input_file], 'w') do |file|
 					file << options[:html]
 				end
 			end
-
+     class_path = ""
 			java_dir = File.join(File.expand_path(File.dirname(__FILE__)), "java")
-			class_path = "'.#{options[:classpath_separator]}#{java_dir}/jar/acts_as_flying_saucer.jar'"
+			 Dir.glob("#{java_dir}/jar/*.jar") do |jar|
+          class_path << "#{options[:classpath_separator]}#{jar}"
+        end
+			
 
 			if options[:nailgun]
 				command = "#{Nailgun::NgCommand::NGPATH} --nailgun-server #{ActsAsFlyingSaucer::Config.options[:nailgun_host]}  --nailgun-port #{ ActsAsFlyingSaucer::Config.options[:nailgun_port]} Xhtml2Pdf #{options[:input_file]} #{options[:output_file]}"

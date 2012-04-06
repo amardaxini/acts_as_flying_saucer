@@ -72,7 +72,7 @@ module ActsAsFlyingSaucer
 				generate_options = ActsAsFlyingSaucer::Config.options.merge({
 								                                                            :input_file => input_file,
 								                                                            :output_file => output_file,
-								                                                            :html => html,
+								                                                            :html => html
 				                                                            })
 
 				ActsAsFlyingSaucer::Xhtml2Pdf.write_pdf(generate_options)
