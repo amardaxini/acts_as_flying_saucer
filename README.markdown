@@ -116,6 +116,7 @@ Sinatra
        end
 Ruby
 ----
+	require 'digest/sha1'
 	class Pdf
     include ActsAsFlyingSaucer::Controller
     acts_as_flying_saucer
